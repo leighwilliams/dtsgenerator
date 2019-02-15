@@ -1,0 +1,31 @@
+import { NormalizedSchema, Schema } from './jsonSchema';
+import SchemaId from './schemaId';
+import { TypeNameConvertor } from './typeNameConvertor';
+import WriteProcessor from './writeProcessor';
+export default class SchemaConvertor {
+    private processor;
+    private convertor;
+    constructor(processor: WriteProcessor, convertor?: TypeNameConvertor);
+    private getLastTypeName;
+    buildSchemaMergedMap(schemas: IterableIterator<Schema>, typeMarker: symbol, namespaceName?: string): any;
+    start(): void;
+    end(): string;
+    startNest(name: string): void;
+    endNest(): void;
+    startInterfaceNest(id: SchemaId): void;
+    endInterfaceNest(): void;
+    outputExportType(id: SchemaId): void;
+    startTypeNest(): void;
+    endTypeNest(terminate: boolean): void;
+    outputRawValue(value: string, isEndOfLine?: boolean): void;
+    outputComments(schema: NormalizedSchema): void;
+    outputPropertyName(_schema: NormalizedSchema, propertyName: string, required: string[] | undefined): void;
+    outputPropertyAttribute(schema: NormalizedSchema): void;
+    outputArrayedType<T>(schema: NormalizedSchema, types: T[], output: (t: T, index: number) => void, terminate: boolean, outputOptional?: boolean): void;
+    outputTypeIdName(schema: NormalizedSchema, currentSchema: Schema, terminate?: boolean, outputOptional?: boolean): void;
+    private getTypename;
+    outputPrimitiveTypeName(schema: NormalizedSchema, typeName: string, terminate?: boolean, outputOptional?: boolean): void;
+    outputStringTypeName(schema: NormalizedSchema, typeName: string, terminate: boolean, outputOptional?: boolean): void;
+    private outputTypeNameTrailer;
+    private outputOptionalInformation;
+}
