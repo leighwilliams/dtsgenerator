@@ -17,6 +17,9 @@ export function toTSType(type: string, debugSource?: any): string | undefined {
         case 'object':
         case 'array':
             return undefined;
+        case 'date':
+        case 'Date':
+            return 'Date';
         default:
             if (debugSource) {
                 debug(`toTSType: unknown type: ${JSON.stringify(debugSource, null, 2)}`);
