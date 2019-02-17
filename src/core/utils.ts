@@ -10,9 +10,14 @@ export function toTSType(type: string, debugSource?: any): string | undefined {
         case 'any':
         case 'null':
         case 'undefined':
-        case 'string':
         case 'number':
         case 'boolean':
+            return type;
+        case 'string':
+            if (debugSource.format && debugSource.format === 'date') {
+                return 'Date'
+            }
+
             return type;
         case 'object':
         case 'array':
